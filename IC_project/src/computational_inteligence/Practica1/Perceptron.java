@@ -8,6 +8,7 @@ package computational_inteligence.Practica1;
 import java.util.ArrayList;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
+import java.util.Random;
 
 /**
  *
@@ -15,35 +16,35 @@ import java.util.stream.IntStream;
  */
 public class Perceptron {
     public int number;
-    public double[] entry;
     public double[] weights;
     public boolean active;
-    public double threshold;
     
-    Perceptron(int n, double threshold){
-        this.number = n;                //Hay que incluir la entrada de bias
-        this.threshold = threshold;     // Y el peso tambien
+    Perceptron(int n){
+        this.number = n;    
+        Random rand = new Random();
+        double w;
+        for(int i = 0; i<n+1; i++){
+            w = rand.nextDouble();
+            this.weights[i] = w;
+        }
     }
     
     double sigmoid(double z){
         double sigma = 0.0;
             sigma = 1/(1+Math.pow(Math.E, -z));
         return sigma;
-    }
+    }    
     
     public boolean output(int[] input){
-        double junction = 1.0;
+        double junction = 0.0;
         boolean activation = false;
         
         for(int i = 1; i <= input.length; i++){
             junction += input[i]*weights[i-1];
         }
-        double sigma = sigmoid(junction);
         
-        activation = (sigma>=threshold)? true:false;
+        activation = (junction>=0)? true:false;
         this.active = activation;
         return activation;
     }
-    
-    
 }
