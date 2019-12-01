@@ -8,7 +8,6 @@ package computational_inteligence.Practica1;
 import java.util.ArrayList;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
-import java.util.Random;
 
 /**
  *
@@ -16,15 +15,15 @@ import java.util.Random;
  */
 public class Perceptron {
     public int number;
-    public double[] weights;
-    public boolean active;
+    public double weights[];
     
-    Perceptron(int n){
+    Perceptron(int n, int inputs){
         this.number = n;    
-        Random rand = new Random();
         double w;
-        for(int i = 0; i<n+1; i++){
-            w = rand.nextDouble();
+        weights = new double [inputs+1]; 
+        for(int i = 0; i<inputs+1; i++){
+            double random = Math.random();
+            w = (Math.random() - random) * 0.1 ;
             this.weights[i] = w;
         }
     }
@@ -35,16 +34,28 @@ public class Perceptron {
         return sigma;
     }    
     
-    public boolean output(int[] input){
-        double junction = 0.0;
+    public boolean output(float input[][]){
         boolean activation = false;
-        
-        for(int i = 1; i <= input.length; i++){
-            junction += input[i]*weights[i-1];
+        int indice_pesos = 0;
+        double junction = 1 * weights[indice_pesos];
+        for(int i = 0; i < input.length; i++){
+            for(int j = 0; j < input.length; j++)
+            junction += input[i][j]*weights[indice_pesos];
+            indice_pesos++;
         }
         
         activation = (junction>=0)? true:false;
-        this.active = activation;
         return activation;
+    }
+
+    void modifica_pesos(float[][] data, double learning_rate, boolean acierto) {
+        double error = (acierto)? 1:-1;
+        int indice_pesos = 1;
+        for(int i = 0; i < data.length; i++){
+            for(int j = 0; i < data.length; i++){
+               weights[indice_pesos] = weights[indice_pesos] +  learning_rate * error * data[i][j];
+               indice_pesos++;
+            }
+        }
     }
 }

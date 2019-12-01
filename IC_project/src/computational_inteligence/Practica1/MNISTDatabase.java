@@ -251,33 +251,33 @@ public class MNISTDatabase
 
 	// Test program
 	
-	public static void main (String[] args)
-		throws IOException
-	{
-            
-		 //downloadMNIST(".\\data\\mnist\\");
-
-		
-		int images[][][];
-		//images = readImages("data/mnist/"+trainingImages);
-		images = readImages("data/mnist/"+testImages);
-		
-		System.out.println("Raw image data:");
-		System.out.println(toString(images[0]));
-		
-		// Normalize image data
-		float data[][] = normalize(images[0]);
-
-		System.out.println("Normalized image:");
-		System.out.println(toString(data));
-		
-		
-		int labels[];
-		// labels = readLabels("data/mnist/"+trainingLabels);
-		labels = readLabels("data/mnist/"+testLabels);
-		
-		System.out.println("Image label:");
-		System.out.println(labels[0]);
-	}
+//	public static void main (String[] args)
+//		throws IOException
+//	{
+//            
+//		 //downloadMNIST(".\\data\\mnist\\");
+//
+//		
+//		int images[][][];
+//		//images = readImages("data/mnist/"+trainingImages);
+//		images = readImages("data/mnist/"+testImages);
+//		
+//		System.out.println("Raw image data:");
+//		System.out.println(toString(images[0]));
+//		
+//		// Normalize image data
+//		float data[][] = normalize(images[0]);
+//
+//		System.out.println("Normalized image:");
+//		System.out.println(toString(data));
+//		
+//		
+//		int labels[];
+//		// labels = readLabels("data/mnist/"+trainingLabels);
+//		labels = readLabels("data/mnist/"+testLabels);
+//		
+//		System.out.println("Image label:");
+//		System.out.println(labels[0]);
+//	}
 
 }

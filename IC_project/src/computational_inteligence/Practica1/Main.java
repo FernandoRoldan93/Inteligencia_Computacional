@@ -17,29 +17,26 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String url = "D:\\Documentos\\NetBeansProjects\\Inteligencia_computacional\\IC_project\\data\\mnist\\";
-        MNISTDatabase.downloadMNIST(url);
+//        String url = "D:\\Documentos\\NetBeansProjects\\Inteligencia_computacional\\IC_project\\data\\mnist\\";
+//        MNISTDatabase.downloadMNIST(url);
         int images_train[][][];
         int images_test[][][];
         images_train = readImages("data\\mnist\\train-images-idx3-ubyte.gz");
         images_test = readImages("data\\mnist\\t10k-images-idx3-ubyte.gz");
         
-        ArrayList<float[][]> train_datas = new ArrayList();
-        ArrayList<float[][]> test_datas = new ArrayList();
-        float data_train[][] = null;
-        float data_test[][] = null;
-        for(int i = 0; i <= images_train.length; i++){
-            data_train = MNISTDatabase.normalize(images_train[i]);  
-            data_test = MNISTDatabase.normalize(images_train[i]);
-        }
-        
+        //System.out.println(MNISTDatabase.toString(images_train[0]));
+       
         int labels_train[];
         int labels_test[];
 		labels_train = MNISTDatabase.readLabels("data\\mnist\\train-labels-idx1-ubyte.gz");
 		labels_test = MNISTDatabase.readLabels("data\\mnist\\t10k-labels-idx1-ubyte.gz");
         
+        Entrenador entrena = new Entrenador(images_train, images_test, labels_test, labels_train);
+        entrena.crea_red();
+        entrena.entrena();
+        System.out.println("-----------------Fin de entrenamiento, comienza el test-----------------");
+        entrena.test();
         
-        
-    
+
     }
 }
