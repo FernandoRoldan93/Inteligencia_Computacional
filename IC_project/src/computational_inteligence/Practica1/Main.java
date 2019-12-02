@@ -5,10 +5,8 @@
  */
 package computational_inteligence.Practica1;
 
-import static computational_inteligence.Practica1.MNISTDatabase.normalize;
 import static computational_inteligence.Practica1.MNISTDatabase.readImages;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -17,19 +15,20 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        String url = "D:\\Documentos\\NetBeansProjects\\Inteligencia_computacional\\IC_project\\data\\mnist\\";
+//        String url = "IC_project\data\\mnist\\";
 //        MNISTDatabase.downloadMNIST(url);
         int images_train[][][];
         int images_test[][][];
-        images_train = readImages("data\\mnist\\train-images-idx3-ubyte.gz");
-        images_test = readImages("data\\mnist\\t10k-images-idx3-ubyte.gz");
+
+        images_train = readImages( "IC_project\\data\\mnist\\train-images-idx3-ubyte.gz");
+        images_test = readImages("IC_project\\data\\mnist\\t10k-images-idx3-ubyte.gz");
         
         //System.out.println(MNISTDatabase.toString(images_train[0]));
        
         int labels_train[];
         int labels_test[];
-		labels_train = MNISTDatabase.readLabels("data\\mnist\\train-labels-idx1-ubyte.gz");
-		labels_test = MNISTDatabase.readLabels("data\\mnist\\t10k-labels-idx1-ubyte.gz");
+		labels_train = MNISTDatabase.readLabels("IC_project\\data\\mnist\\train-labels-idx1-ubyte.gz");
+		labels_test = MNISTDatabase.readLabels("IC_project\\data\\mnist\\t10k-labels-idx1-ubyte.gz");
         
         Entrenador entrena = new Entrenador(images_train, images_test, labels_test, labels_train);
         entrena.crea_red();
