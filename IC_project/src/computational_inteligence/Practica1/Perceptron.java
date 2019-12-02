@@ -23,36 +23,36 @@ public class Perceptron {
         weights = new double [inputs+1]; 
         for(int i = 0; i<inputs+1; i++){
             double random = Math.random();
-            w = (Math.random() - random) * 0.1 ;
+            w = (Math.random() - random) * 0.01 ;
             this.weights[i] = w;
         }
     }
     
-    double sigmoid(double z){
-        double sigma = 0.0;
-            sigma = 1/(1+Math.pow(Math.E, -z));
-        return sigma;
-    }    
-    
     public boolean output(float input[][]){
         boolean activation = false;
         int indice_pesos = 0;
-        double junction = 1 * weights[indice_pesos];
+        double junction = 1 * weights[0];
         for(int i = 0; i < input.length; i++){
-            for(int j = 0; j < input.length; j++)
-            junction += input[i][j]*weights[indice_pesos];
-            indice_pesos++;
+            for(int j = 0; j < input.length; j++){
+                junction += input[i][j]*weights[indice_pesos];
+                indice_pesos++;
+            }
         }
         
         activation = (junction>=0)? true:false;
         return activation;
     }
 
-    void modifica_pesos(float[][] data, double learning_rate, boolean acierto) {
-        double error = (acierto)? 1:-1;
+    void modifica_pesos(float[][] data, double learning_rate, boolean err) {
+        double error;
+        if(err)
+            error = 1;
+        else
+            error = -1;
         int indice_pesos = 1;
+        weights[0] += learning_rate * error;
         for(int i = 0; i < data.length; i++){
-            for(int j = 0; i < data.length; i++){
+            for(int j = 0; j < data.length; j++){
                weights[indice_pesos] = weights[indice_pesos] +  learning_rate * error * data[i][j];
                indice_pesos++;
             }
