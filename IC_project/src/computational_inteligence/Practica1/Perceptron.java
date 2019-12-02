@@ -23,7 +23,7 @@ public class Perceptron {
         weights = new double [inputs+1]; 
         for(int i = 0; i<inputs+1; i++){
             double random = Math.random();
-            w = (Math.random() - random) * 0.01 ;
+            w = (Math.random() - random) * 0.1 ;
             this.weights[i] = w;
         }
     }

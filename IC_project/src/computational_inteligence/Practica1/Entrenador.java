@@ -16,7 +16,7 @@ public class Entrenador {
     private int imagenes_test[][][];
     private int etiquetas_train[];
     private int etiquetas_test[];
-    private double learning_rate = 0.01;
+    private double learning_rate = 0.001;
     private int tamaño_imagenes = 28*28;
     private int epocas = 10;
 
