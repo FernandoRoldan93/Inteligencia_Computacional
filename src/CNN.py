@@ -14,7 +14,7 @@ from tensorflow.keras.utils import to_categorical
 import time
 import matplotlib.pyplot as plt
 
-batch_size = 64
+batch_size = 128
 num_classes = 10
 epochs = 10 
 
@@ -28,16 +28,15 @@ train_labels = to_categorical(train_labels)
 test_labels = to_categorical(test_labels)
 
 network = Sequential()
-network.add(Conv2D(64, kernel_size=3, activation='relu', input_shape=(28,28,1)))
+network.add(Conv2D(32, kernel_size=3, activation='relu', input_shape=(28,28,1)))
+network.add(Conv2D(64, kernel_size=3, activation='relu'))
 network.add(MaxPooling2D(pool_size=(2,2)))
-network.add(Conv2D(32, kernel_size=3, activation='relu'))
+network.add(Conv2D(128, kernel_size=3, activation='relu'))
 network.add(MaxPooling2D(pool_size=(2,2)))
 network.add(Dropout(rate=0.2))
 network.add(Flatten())
-network.add(Dense(512, activation='relu'))
-network.add(Dropout(rate=0.2))
 network.add(Dense(128, activation='relu'))
-network.add(Dropout(rate=0.2))
+network.add(Dropout(rate=0.5))
 network.add(Dense(num_classes, activation='softmax'))
 
 network.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
